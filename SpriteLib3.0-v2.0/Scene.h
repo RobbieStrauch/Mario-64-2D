@@ -28,18 +28,42 @@ public:
 
 	void AdjustScrollOffset();
 
-	void CreateCameraEntity(bool mainCamera, float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio);
+	void CreateMainCameraEntity(float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio);
+
+	void CreateCameraEntity(int& target, float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio);
 
 	void CreateMapEntity(std::string name, int width, int height, float transparency, vec3 position);
-	
-	void CreateMainPlayerEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, 
+
+	void CreateMainPlayerEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition,
 		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor, float gravityScale);
-	
+
 	void CreateGroundEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition,
 		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
 
-	void CreatePositionTriggerEntity(int imageWidth, int imageHeight, vec3 spritePosition, int target, 
+	void CreateBlockEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
+		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateEnemyEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
+		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateBowserTriggerEntity(int imageWidth, int imageHeight, vec3 spritePosition, int& target, float amount,
+		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreatePushMarioTriggerEntity(int imageWidth, int imageHeight, vec3 spritePosition, int& target1, int target2,
+		int amount, b2Vec2 movement, b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateBowserHealthTriggerEntity(int imageWidth, int imageHeight, vec3 spritePosition, int& target1, int target2,
+		int amount, b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreatePositionTriggerEntity(int imageWidth, int imageHeight, vec3 spritePosition, int target,
 		b2Vec2 movement, b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateStarEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
+		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateDestroyStarTriggerEntity(vec3 spritePosition, int& target1, int& target2, b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor);
+
+	void CreateStarTriggerEntity(vec3 spritePosition, int& target1, int target2, b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor);
 
 	//Gamepad Input
 	//Because these are virtual you can override them in your inherited classes.
@@ -74,7 +98,7 @@ public:
 	std::string GetName() const;
 	//Sets the name of the scene
 	void SetName(std::string name);
-	
+
 	//Gravity
 	b2Vec2 GetGravity() const;
 	void SetGravity(b2Vec2 grav);
@@ -87,9 +111,9 @@ protected:
 	b2World* m_physicsWorld = nullptr;
 	b2Vec2 m_gravity = b2Vec2(float32(0.f), float32(0.f));
 
-	vec4 m_clearColor = vec4(0.15f, 0.33f, 0.58f, 1.f);
+	vec4 m_clearColor = vec4(0.408f, 0.533f, 1.f, 1.f);
 
-	entt::registry* m_sceneReg = nullptr;	
+	entt::registry* m_sceneReg = nullptr;
 	std::string m_name = "Default Name";
 private:
 	//Hello world entity number

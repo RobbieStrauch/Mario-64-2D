@@ -4,7 +4,7 @@
 bool PhysicsBody::m_drawBodies = false;
 std::vector<int> PhysicsBody::m_bodiesToDelete;
 
-PhysicsBody::PhysicsBody(int entity, b2Body * body, float radius, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction, float density)
+PhysicsBody::PhysicsBody(int entity, b2Body* body, float radius, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction, float density)
 {
 	//Bodies don't reference a shape by themselves
 	//they need a shape that has been linked to a fixture
@@ -135,7 +135,7 @@ void PhysicsBody::DeleteBody()
 	}
 }
 
-void PhysicsBody::Update(Transform * trans)
+void PhysicsBody::Update(Transform* trans)
 {
 	//Make sure that movement doesn't happen in contact step
 	if (moveLater)
@@ -151,7 +151,7 @@ void PhysicsBody::Update(Transform * trans)
 	}
 	if (scaleLater)
 	{
- 		ScaleBody(scaleVal, scaleFixt);
+		ScaleBody(scaleVal, scaleFixt);
 		scaleLater = false;
 	}
 
@@ -166,12 +166,12 @@ void PhysicsBody::Update(Transform * trans)
 void PhysicsBody::ApplyForce(vec3 force)
 {
 	m_body->ApplyForce(b2Vec2(float32(force.x), float32(force.y)),
-						b2Vec2(float32(m_body->GetPosition().x), float32(m_body->GetPosition().y)),
-						 true);
+		b2Vec2(float32(m_body->GetPosition().x), float32(m_body->GetPosition().y)),
+		true);
 }
 
 
-b2Body * PhysicsBody::GetBody() const
+b2Body* PhysicsBody::GetBody() const
 {
 	return m_body;
 }
@@ -200,7 +200,7 @@ vec3 PhysicsBody::GetVelocity() const
 	//Returns current velocity
 	b2Vec2 vel = m_body->GetLinearVelocity();
 	vec3 temp = vec3(vel.x, vel.y, 0.f);
-	
+
 	return temp;
 }
 
@@ -257,9 +257,28 @@ bool PhysicsBody::GetDraw()
 	return m_drawBodies;
 }
 
+int PhysicsBody::GetStar() const
+{
+	return starCount;
+}
+
+void PhysicsBody::SetStar(int star)
+{
+	starCount = star;
+}
+
+int PhysicsBody::GetHealth() const
+{
+	return health;
+}
+
+void PhysicsBody::SetHealth(int amount)
+{
+	health = amount;
+}
 
 
-void PhysicsBody::SetBody(b2Body * body)
+void PhysicsBody::SetBody(b2Body* body)
 {
 	m_body = body;
 }
@@ -367,7 +386,7 @@ void PhysicsBody::ScaleBody(float scale, int fixture, bool contactStep)
 			m_height = tY - bY;
 			m_body->SetAwake(true);
 		}
-		
+
 		int ent = (int)m_body->GetUserData();
 
 		auto tempSpr = ECS::m_reg->try_get<Sprite>(ent);

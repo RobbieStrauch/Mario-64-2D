@@ -39,8 +39,35 @@ protected:
 
 	std::string m_fileInput;
 
+	int m_gui;
+
 	PhysicsPlaygroundListener listener;
 
-	int puzzleWall1;
-	int puzzleWall2;
+	int wall;
+
+	int Bowser;
+	int bowserAttack1;
+	int bowserAttack2;
+	int marioAttack;
+	int marioAttackJump;
+
+	int world1_star1;
+	int world1_star2;
+	int world1_star3;
+	int world1_star4;
+	int world1_star5;
+	int world1_starCounter1;
+	int world1_starCounter2;
+	int world1_starCounter3;
+	int world1_starCounter4;
+	int world1_starCounter5;
+
+	int world2_star1;
+	int world2_star2;
+	int world2_star3;
+	int world2_star4;
+	int world2_starCounter1;
+	int world2_starCounter2;
+	int world2_starCounter3;
+	int world2_starCounter4;
 };

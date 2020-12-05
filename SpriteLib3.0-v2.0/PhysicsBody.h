@@ -21,14 +21,14 @@ enum class BodyType
 enum EntityCategories
 {
 	ENVIRONMENT = 0x0001,
-	GROUND		= 0x0002,
-	OBJECTS		= 0x0004,
-	PLAYER		= 0x0008,
-	FRIENDLY	= 0x0016,
-	ENEMY		= 0x0032,
-	PICKUP		= 0x0064,
-	TRIGGER		= 0x0128,
-	HEXAGON		= 0x0256
+	GROUND = 0x0002,
+	OBJECTS = 0x0004,
+	PLAYER = 0x0008,
+	FRIENDLY = 0x0016,
+	ENEMY = 0x0032,
+	PICKUP = 0x0064,
+	TRIGGER = 0x0128,
+	HEXAGON = 0x0256
 };
 
 
@@ -37,11 +37,11 @@ class PhysicsBody
 public:
 	PhysicsBody() { };
 	//Constructs a circle collider
-	PhysicsBody(int entity, b2Body* body, float radius, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction=1.f, float density=1.f);
+	PhysicsBody(int entity, b2Body* body, float radius, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction = 1.f, float density = 1.f);
 	//Constructs a box collider
-	PhysicsBody(int entity, b2Body* body, float width, float height, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction=1.f, float density=1.f);
+	PhysicsBody(int entity, b2Body* body, float width, float height, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction = 1.f, float density = 1.f);
 	//Constructs a polygon collider
-	PhysicsBody(int entity, BodyType bodyType, b2Body* body, std::vector<b2Vec2> points, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction=1.f, float density=1.f);
+	PhysicsBody(int entity, BodyType bodyType, b2Body* body, std::vector<b2Vec2> points, vec2 centerOffset, bool sensor, EntityCategories category, int collidesWith, float friction = 1.f, float density = 1.f);
 
 	//Delete the physics body
 	void DeleteBody();
@@ -69,7 +69,6 @@ public:
 	float GetGravityScale() const;
 	//Gets the debug color
 	vec4 GetColor() const;
-	
 
 	//Gets the width of the physics body
 	float GetWidth() const;
@@ -90,6 +89,11 @@ public:
 	//Get whether or not we are currently drawing our physics bodies
 	static bool GetDraw();
 
+	int GetStar() const;
+	void SetStar(int star);
+
+	int GetHealth() const;
+	void SetHealth(int amount);
 
 	//Setters//
 	//Sets the pointer to the box2D body
@@ -120,18 +124,23 @@ public:
 	void SetCenterOffset(vec2 cent);
 
 	//Set the rotation angle
-	void SetRotationAngleDeg(float degrees, bool contactStep=false);
+	void SetRotationAngleDeg(float degrees, bool contactStep = false);
 	//Set whether the body has a fixed rotation
 	void SetFixedRotation(bool fixed);
 
-	void SetCategoryBit(EntityCategories category, int fixture=0);
-	void SetCollisionBit(EntityCategories collision, int fixture=0);
+	void SetCategoryBit(EntityCategories category, int fixture = 0);
+	void SetCollisionBit(EntityCategories collision, int fixture = 0);
 
 	//Set whether the bodies are being drawn
 	static void SetDraw(bool drawBodies);
 
 	static std::vector<int> m_bodiesToDelete;
+
+	float speed = -0.5;
 private:
+	int starCount;
+	int health;
+
 	//The actual box2D body
 	b2Body* m_body = nullptr;
 	//Body type
@@ -160,7 +169,7 @@ private:
 	//Width and height of the body
 	float m_width = 0.f;
 	float m_height = 0.f;
-	
+
 
 	//Do you draw the bodies?
 	static bool m_drawBodies;

@@ -140,6 +140,7 @@
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="BackEnd.h" />
     <ClInclude Include="BloomEffect.h" />
+    <ClInclude Include="BowserTrigger.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSystem.h" />
     <ClInclude Include="CanJump.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GrainEffect.h" />
     <ClInclude Include="GreyscaleEffect.h" />
+    <ClInclude Include="HealthTrigger.h" />
     <ClInclude Include="HorizontalScroll.h" />
     <ClInclude Include="include\imgui\imconfig.h" />
     <ClInclude Include="include\imgui\imgui.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="PixelateEffect.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PostEffect.h" />
+    <ClInclude Include="PushTrigger.h" />
     <ClInclude Include="RenderingSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scenes.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="SepiaEffect.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StarTrigger.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Timer.h" />
@@ -198,6 +202,7 @@
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="BackEnd.cpp" />
     <ClCompile Include="BloomEffect.cpp" />
+    <ClCompile Include="BowserTrigger.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSystem.cpp" />
     <ClCompile Include="CanJump.cpp" />
@@ -208,6 +213,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GrainEffect.cpp" />
     <ClCompile Include="GreyscaleEffect.cpp" />
+    <ClCompile Include="HealthTrigger.cpp" />
     <ClCompile Include="HorizontalScroll.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
     <ClCompile Include="include\imgui\imgui_demo.cpp" />
@@ -227,6 +233,7 @@
     <ClCompile Include="PixelateEffect.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PostEffect.cpp" />
+    <ClCompile Include="PushTrigger.cpp" />
     <ClCompile Include="RenderingSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Selectable.cpp" />
@@ -234,6 +241,7 @@
     <ClCompile Include="SepiaEffect.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="StarTrigger.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timer.cpp" />
