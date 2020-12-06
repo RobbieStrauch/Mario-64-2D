@@ -43,7 +43,8 @@ protected:
 
 	PhysicsPlaygroundListener listener;
 
-	int wall;
+	int wall1;
+	int wall2;
 
 	int Bowser;
 	int bowserAttack1;
@@ -70,4 +71,11 @@ protected:
 	int world2_starCounter2;
 	int world2_starCounter3;
 	int world2_starCounter4;
+
+	int world3_star1;
+	int world3_star2;
+	int world3_star3;
+	int world3_starCounter1;
+	int world3_starCounter2;
+	int world3_starCounter3;
 };
