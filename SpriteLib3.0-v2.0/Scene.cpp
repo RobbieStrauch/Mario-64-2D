@@ -116,27 +116,6 @@ void Scene::CreateMainCameraEntity(float windowWidth, float windowHeight, vec4 t
 	ECS::GetComponent<VerticalScroll>(entity).SetCam(&ECS::GetComponent<Camera>(entity));
 }
 
-void Scene::CreateCameraEntity(int& target, float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio)
-{
-	//Creates Camera entity
-	auto entity = ECS::CreateEntity();
-	target = entity;
-	ECS::SetIsMainCamera(entity, false);
-
-	//Creates new orthographic camera
-	ECS::AttachComponent<Camera>(entity);
-	ECS::AttachComponent<HorizontalScroll>(entity);
-	ECS::AttachComponent<VerticalScroll>(entity);
-
-	ECS::GetComponent<Camera>(entity).SetOrthoSize(temp);
-	ECS::GetComponent<Camera>(entity).SetWindowSize(vec2(float(windowWidth), float(windowHeight)));
-	ECS::GetComponent<Camera>(entity).Orthographic(aspectRatio, temp.x, temp.y, temp.z, temp.w, zNear, zFar);
-
-	//Attaches the camera to vert and horiz scrolls
-	ECS::GetComponent<HorizontalScroll>(entity).SetCam(&ECS::GetComponent<Camera>(entity));
-	ECS::GetComponent<VerticalScroll>(entity).SetCam(&ECS::GetComponent<Camera>(entity));
-}
-
 void Scene::CreateMapEntity(std::string name, int width, int height, float transparency, vec3 position)
 {
 	auto entity = ECS::CreateEntity();
@@ -155,6 +134,41 @@ void Scene::CreateMapEntity(std::string name, int width, int height, float trans
 	b2BodyDef tempDef;
 	tempBody = m_physicsWorld->CreateBody(&tempDef);
 	tempBody->SetSleepingAllowed(false);
+}
+
+void Scene::CreateStarGUIEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
+	b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor)
+{
+	auto entity = ECS::CreateEntity();
+	target = entity;
+
+	//Add components
+	ECS::AttachComponent<Sprite>(entity);
+	ECS::AttachComponent<Transform>(entity);
+	ECS::AttachComponent<PhysicsBody>(entity);
+
+	//Sets up the components
+	ECS::GetComponent<Sprite>(entity).LoadSprite(name, imageWidth, imageHeight);
+	ECS::GetComponent<Sprite>(entity).SetTransparency(transparency);
+	ECS::GetComponent<Transform>(entity).SetPosition(spritePosition);
+
+	auto& tempSpr = ECS::GetComponent<Sprite>(entity);
+	auto& tempPhsBody = ECS::GetComponent<PhysicsBody>(entity);
+
+	float shrinkX = 0.f;
+	float shrinkY = 0.f;
+
+	b2Body* tempBody;
+	b2BodyDef tempDef;
+	tempDef.type = bodyType;
+	tempDef.position.Set(float32(physicsPositionX), float32(physicsPositionY));
+
+	tempBody = m_physicsWorld->CreateBody(&tempDef);
+	tempPhsBody = PhysicsBody(entity, tempBody, float((tempSpr.GetWidth() - shrinkY) / 2.f), vec2(0.f, 0.f), false, OBJECTS, PLAYER, 0.3f);
+
+	tempPhsBody.SetRotationAngleDeg(angle);
+	tempPhsBody.SetFixedRotation(fixed);
+	tempPhsBody.SetColor(physicsColor);
 }
 
 void Scene::CreateMainPlayerEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition,
@@ -500,7 +514,8 @@ void Scene::CreateStarEntity(std::string name, int imageWidth, int imageHeight, 
 	tempPhsBody.SetColor(physicsColor);
 }
 
-void Scene::CreateDestroyStarTriggerEntity(vec3 spritePosition, int& target1, int& target2, b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor)
+void Scene::CreateDestroyStarTriggerEntity(vec3 spritePosition, int& target1, int& target2,
+	b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor)
 {
 	//Creates entity
 	auto entity = ECS::CreateEntity();

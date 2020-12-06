@@ -30,9 +30,6 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	// Main Camera
 	Scene::CreateMainCameraEntity(windowWidth, windowHeight, vec4(-125.f, 125.f, -125.f, 125.f), -100.f, 100.f, aspectRatio);
 
-	// Camera
-	//Scene::CreateCameraEntity(m_gui, windowWidth, windowHeight, vec4(-155.f, 155.f, -155.f, 155.f), -100.f, 100.f, aspectRatio);
-
 	// Worlds
 	Scene::CreateMapEntity("World1.png", 3392, 448, 1.f, vec3(0.f, 0.f, 0.f));
 	Scene::CreateMapEntity("World2.png", 3392, 448, 1.f, vec3(5000.f, 0.f, 0.f));
@@ -40,11 +37,25 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreateMapEntity("Castle.png", 640, 480, 1.f, vec3(0.f, 7000.f, 0.f));
 
 	// Mario
-	Scene::CreateMainPlayerEntity("Mario.png", 15, 20, 1.f, vec3(0.f, 30.f, 2.f), b2_dynamicBody, 11650.f, -400.f, 0.f, true, vec4(1.f, 0.f, 1.f, 0.3f), 1.f);
+	Scene::CreateMainPlayerEntity("Mario.png", 15, 20, 1.f, vec3(0.f, 30.f, 2.f), b2_dynamicBody, -1600.f, 30.f, 0.f, true, vec4(1.f, 0.f, 1.f, 0.3f), 1.f);
 
 	// World1 Start Point: (-1600.f, 30.f)
 	// World2 Start Point: (3452.f, -150.f)
 	// World3 Start Point: (8650.f, -400.f)
+
+	// GUI
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI1, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI2, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI3, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI4, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI5, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI6, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI7, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI8, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI9, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI10, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI11, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
+	Scene::CreateStarGUIEntity("Star.png", 10, 10, 0.f, vec3(45.f, -8.f, 3.f), starGUI12, b2_staticBody, -1550.f, 30.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
 
 	/////////////////////////////////////////////////////////////////////////// WORLD 1 //////////////////////////////////////////////////////////////////
 
@@ -188,8 +199,8 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreateGroundEntity("box.png", 340, 35, 0.f, vec3(30.f, -20.f, 2.f), b2_staticBody, 6526.f, -86.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
 	Scene::CreateGroundEntity("box.png", 340, 130, 0.f, vec3(30.f, -20.f, 2.f), b2_staticBody, 6526.f, -162.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
 	Scene::CreateGroundEntity("box.png", 240, 35, 0.f, vec3(30.f, -20.f, 2.f), b2_staticBody, 6679.f, 22.f, 90.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
-	//Scene::CreateBlockEntity("Block.png", 30, 166, 1.f, vec3(30.f, -20.f, 2.f), wall1, b2_staticBody, 6315.f, 40.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
-	Scene::CreateBlockEntity("Block.png", 30, 166, 1.f, vec3(30.f, -20.f, 2.f), wall2, b2_staticBody, 6315.f, -10000.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
+	Scene::CreateBlockEntity("Block.png", 30, 166, 1.f, vec3(30.f, -20.f, 2.f), starWall, b2_staticBody, 6315.f, 50.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
+	Scene::CreateBlockEntity("Block.png", 30, 166, 1.f, vec3(30.f, -20.f, 2.f), finalBossWall, b2_staticBody, 6315.f, -10000.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f));
 
 	// Death Trigger
 	Scene::CreatePositionTriggerEntity(3592, 1000, vec3(5000, 0, 0), MainEntities::MainPlayer(), b2Vec2(3452.f, -150.f), b2_staticBody, 5050, -710, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
@@ -198,7 +209,7 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreatePositionTriggerEntity(40, 15, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 3322.f, -210.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Final Boss Trigger
-	Scene::CreatePositionTriggerEntity(10, 200, vec3(30.f, -20.f, 2.f), wall2, b2Vec2(6315.f, 50.f), b2_staticBody, 6335.f, 40.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
+	Scene::CreatePositionTriggerEntity(10, 200, vec3(30.f, -20.f, 2.f), finalBossWall, b2Vec2(6315.f, 50.f), b2_staticBody, 6335.f, 40.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Bowser Triggers
 	Scene::CreateBowserTriggerEntity(10, 50, vec3(30.f, -20.f, 2.f), Bowser, 0.5, b2_staticBody, 6358.f, -20.f, 0, true, vec4(1.f, 0.f, 0.f, 0.3f));
@@ -294,6 +305,73 @@ void Mario::Update()
 		increase = 5;
 	}
 
+	/////////////////////////////////////////////////////////////////////////// GUI //////////////////////////////////////////////////////////////////
+
+	ECS::GetComponent<PhysicsBody>(starGUI1).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 200, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI2).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 185, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI3).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 170, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI4).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 155, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI5).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 140, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI6).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 125, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 100));
+	ECS::GetComponent<PhysicsBody>(starGUI7).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 200, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+	ECS::GetComponent<PhysicsBody>(starGUI8).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 185, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+	ECS::GetComponent<PhysicsBody>(starGUI9).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 170, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+	ECS::GetComponent<PhysicsBody>(starGUI10).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 155, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+	ECS::GetComponent<PhysicsBody>(starGUI11).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 140, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+	ECS::GetComponent<PhysicsBody>(starGUI12).SetPosition(b2Vec2(ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().x + 125, ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition().y + 85));
+
+	if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 1)
+	{
+		ECS::GetComponent<Sprite>(starGUI1).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 2)
+	{
+		ECS::GetComponent<Sprite>(starGUI2).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 3)
+	{
+		ECS::GetComponent<Sprite>(starGUI3).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 4)
+	{
+		ECS::GetComponent<Sprite>(starGUI4).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 5)
+	{
+		ECS::GetComponent<Sprite>(starGUI5).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 6)
+	{
+		ECS::GetComponent<Sprite>(starGUI6).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 7)
+	{
+		ECS::GetComponent<Sprite>(starGUI7).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 8)
+	{
+		ECS::GetComponent<Sprite>(starGUI8).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 9)
+	{
+		ECS::GetComponent<Sprite>(starGUI9).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 10)
+	{
+		ECS::GetComponent<Sprite>(starGUI10).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 11)
+	{
+		ECS::GetComponent<Sprite>(starGUI11).SetTransparency(1.f);
+	}
+	else if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() == 12)
+	{
+		ECS::GetComponent<Sprite>(starGUI12).SetTransparency(1.f);
+		ECS::GetComponent<PhysicsBody>(starWall).SetPosition(b2Vec2(6315.f, -10000.f));
+	}
+
+	/////////////////////////////////////////////////////////////////////////// GUI //////////////////////////////////////////////////////////////////
+
 	ECS::GetComponent<PhysicsBody>(bowserAttack1).SetPosition(ECS::GetComponent<PhysicsBody>(bowserAttack1).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(bowserAttack2).SetPosition(ECS::GetComponent<PhysicsBody>(bowserAttack2).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(marioAttack).SetPosition(ECS::GetComponent<PhysicsBody>(marioAttack).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
@@ -318,7 +396,7 @@ void Mario::Update()
 		m_clearColor = vec4(0.549f, 0.639f, 0.796f, 1.f);
 	}
 
-	std::cout << "Stars Captured: " << ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() << std::endl;
+	//std::cout << "Stars Captured: " << ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() << std::endl;
 
 	if (m_lerpEnabled)
 	{

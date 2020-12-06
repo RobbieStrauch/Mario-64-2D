@@ -30,9 +30,10 @@ public:
 
 	void CreateMainCameraEntity(float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio);
 
-	void CreateCameraEntity(int& target, float windowWidth, float windowHeight, vec4 temp, float zNear, float zFar, float aspectRatio);
-
 	void CreateMapEntity(std::string name, int width, int height, float transparency, vec3 position);
+
+	void CreateStarGUIEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
+		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
 
 	void CreateMainPlayerEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition,
 		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor, float gravityScale);
@@ -61,7 +62,8 @@ public:
 	void CreateStarEntity(std::string name, int imageWidth, int imageHeight, float transparency, vec3 spritePosition, int& target,
 		b2BodyType bodyType, float physicsPositionX, float physicsPositionY, float angle, bool fixed, vec4 physicsColor);
 
-	void CreateDestroyStarTriggerEntity(vec3 spritePosition, int& target1, int& target2, b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor);
+	void CreateDestroyStarTriggerEntity(vec3 spritePosition, int& target1, int& target2, 
+		b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor);
 
 	void CreateStarTriggerEntity(vec3 spritePosition, int& target1, int target2, b2BodyType bodyType, float angle, bool fixed, vec4 physicsColor);
 

@@ -39,12 +39,23 @@ protected:
 
 	std::string m_fileInput;
 
-	int m_gui;
+	int starGUI1;
+	int starGUI2;
+	int starGUI3;
+	int starGUI4;
+	int starGUI5;
+	int starGUI6;
+	int starGUI7;
+	int starGUI8;
+	int starGUI9;
+	int starGUI10;
+	int starGUI11;
+	int starGUI12;
 
 	PhysicsPlaygroundListener listener;
 
-	int wall1;
-	int wall2;
+	int finalBossWall;
+	int starWall;
 
 	int Bowser;
 	int bowserAttack1;
@@ -78,4 +89,5 @@ protected:
 	int world3_starCounter1;
 	int world3_starCounter2;
 	int world3_starCounter3;
+
 };
