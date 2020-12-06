@@ -383,6 +383,14 @@ void Mario::Update()
 		ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).SetPosition(b2Vec2(0, 6810));
 		m_clearColor = vec4(0.408f, 0.533f, 1.f, 1.f);
 	}
+	if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetHealth() == 0)
+	{
+		ECS::GetComponent<PhysicsBody>(Bowser).SetHealth(1000);
+		ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).SetPosition(b2Vec2(3452.f, -150.f));
+		ECS::GetComponent<PhysicsBody>(finalBossWall).SetPosition(b2Vec2(6315.f, -10000.f));
+		ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).SetHealth(100);
+	}
+
 	if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition() == b2Vec2(3452.f, -150.f))
 	{
 		m_clearColor = vec4(0.f, 0.f, 0.f, 0.f);
