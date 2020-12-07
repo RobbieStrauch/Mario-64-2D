@@ -131,7 +131,7 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreatePositionTriggerEntity(3592, 1000, vec3(0, 0, 0), MainEntities::MainPlayer(), b2Vec2(-1600.f, 30.f), b2_staticBody, 50, -700, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Next World Trigger
-	Scene::CreatePositionTriggerEntity(20, 15, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 1580.f, 20.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
+	Scene::CreatePositionTriggerEntity(30, 30, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 1632.f, 48.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	/////////////////////////////////////////////////////////////////////////// WORLD 1 //////////////////////////////////////////////////////////////////
 
@@ -206,7 +206,7 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreatePositionTriggerEntity(3592, 1000, vec3(5000, 0, 0), MainEntities::MainPlayer(), b2Vec2(3452.f, -150.f), b2_staticBody, 5050, -710, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Previous World Trigger
-	Scene::CreatePositionTriggerEntity(40, 15, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 3322.f, -210.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
+	Scene::CreatePositionTriggerEntity(30, 30, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 3360.f, -178.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Final Boss Trigger
 	Scene::CreatePositionTriggerEntity(10, 200, vec3(30.f, -20.f, 2.f), finalBossWall, b2Vec2(6315.f, 50.f), b2_staticBody, 6335.f, 40.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
@@ -271,10 +271,10 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreatePositionTriggerEntity(4592, 1000, vec3(10000.f, 0, 0), MainEntities::MainPlayer(), b2Vec2(8650.f, -400.f), b2_staticBody, 10050.f, -1010, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Previous World
-	Scene::CreatePositionTriggerEntity(20, 15, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(-1600.f, 30.f), b2_staticBody, 8550.f, -470.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
+	Scene::CreatePositionTriggerEntity(30, 25, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(-1600.f, 30.f), b2_staticBody, 8561.f, -443.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	// Next World
-	Scene::CreatePositionTriggerEntity(20, 15, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(3452.f, -150.f), b2_staticBody, 11405.f, -470.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
+	Scene::CreatePositionTriggerEntity(30, 25, vec3(30.f, -20.f, 2.f), MainEntities::MainPlayer(), b2Vec2(3452.f, -150.f), b2_staticBody, 11400.f, -443.f, 0.f, true, vec4(1.f, 0.f, 0.f, 0.3f));
 
 	/////////////////////////////////////////////////////////////////////////// WORLD 3 //////////////////////////////////////////////////////////////////
 
