@@ -1,0 +1,48 @@
+{
+  "DieRight": {
+    "Frame0": [ 412.0, 67.0, 475.0, 4.0 ],
+    "NumFrames": 1,
+    "Repeating": false,
+    "SecsPerFrame": 1.0
+  },
+  "IdleRight": {
+    "Frame0": [ 4.0, 67.0, 67.0, 4.0 ],
+    "NumFrames": 1,
+    "Repeating": false,
+    "SecsPerFrame": 1.0
+  },
+  "JumpRight": {
+    "Frame0": [ 344.0, 67.0, 407.0, 4.0 ],
+    "NumFrames": 1,
+    "Repeating": false,
+    "SecsPerFrame": 1.0
+  },
+  "WalkRight": {
+    "Frame0": [ 72.0, 67.0, 135.0, 4.0 ],
+    "Frame1": [ 140.0, 67.0, 203.0, 4.0 ],
+    "Frame2": [ 208.0, 67.0, 271.0, 4.0 ],
+    "NumFrames": 3,
+    "Repeating": true,
+    "SecsPerFrame": 0.33000001311302185
+  },
+  "IdleLeft": {
+    "Frame0": [ 412.0, 135.0, 475.0, 72.0 ],
+    "NumFrames": 1,
+    "Repeating": false,
+    "SecsPerFrame": 1.0
+  },
+  "JumpLeft": {
+    "Frame0": [ 72.0, 135.0, 407.0, 72.0 ],
+    "NumFrames": 1,
+    "Repeating": false,
+    "SecsPerFrame": 1.0
+  },
+  "WalkLeft": {
+    "Frame0": [ 344.0, 135.0, 407.0, 72.0 ],
+    "Frame1": [ 276.0, 135.0, 340.0, 72.0 ],
+    "Frame2": [ 208.0, 135.0, 271.0, 72.0 ],
+    "NumFrames": 3,
+    "Repeating": true,
+    "SecsPerFrame": 0.33000001311302185
+  }
+}

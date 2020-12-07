@@ -1,0 +1,16 @@
+{
+  "WalkLeft": {
+    "Frame0": [ 4.0, 127.0, 127.0, 4.0 ],
+    "Frame1": [ 132.0, 127.0, 255.0, 4.0 ],
+    "NumFrames": 2,
+    "Repeating": true,
+    "SecsPerFrame": 0.25
+  },
+  "WalkRight": {
+    "Frame0": [ 4.0, 255.0, 127.0, 132.0 ],
+    "Frame1": [ 132.0, 255.0, 255.0, 255.0 ],
+    "NumFrames": 2,
+    "Repeating": true,
+    "SecsPerFrame": 0.25
+  }
+}

@@ -24,9 +24,6 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	//Sets up aspect ratio for the camera
 	float aspectRatio = windowWidth / windowHeight;
 
-	//EffectManager::CreateEffect(EffectType::Vignette, windowWidth, windowHeight);
-	//EffectManager::CreateEffect(EffectType::Sepia, windowWidth, windowHeight);
-
 	// Main Camera
 	Scene::CreateMainCameraEntity(windowWidth, windowHeight, vec4(-125.f, 125.f, -125.f, 125.f), -100.f, 100.f, aspectRatio);
 
@@ -35,6 +32,9 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreateMapEntity("World2.png", 3392, 448, 1.f, vec3(5000.f, 0.f, 0.f));
 	Scene::CreateMapEntity("World3.png", 2992, 1048, 1.f, vec3(10000.f, 0.f, 0.f));
 	Scene::CreateMapEntity("Castle.png", 640, 480, 1.f, vec3(0.f, 7000.f, 0.f));
+
+	// Bowser
+	Scene::CreateEnemyEntity("Bowser.png", 50, 60, 1.f, vec3(45.f, -8.f, 3.f), Bowser, b2_dynamicBody, 6609.f, -5.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
 
 	// Mario
 	Scene::CreateMainPlayerEntity("Mario.png", 15, 20, 1.f, vec3(0.f, 30.f, 2.f), b2_dynamicBody, -1600.f, 30.f, 0.f, true, vec4(1.f, 0.f, 1.f, 0.3f), 1.f);
@@ -156,9 +156,6 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 	Scene::CreateStarEntity("Star.png", 20, 20, 1.f, vec3(45.f, -8.f, 3.f), world2_star4, b2_staticBody, 5756.f, -130.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
 	Scene::CreateStarTriggerEntity(vec3(30.f, -20.f, 80.f), world2_starCounter4, world2_star4, b2_staticBody, 0, true, vec4(1.f, 0.f, 0.f, 0.3f));
 	Scene::CreateDestroyStarTriggerEntity(vec3(30.f, -20.f, 80.f), world2_star4, world2_starCounter4, b2_staticBody, 0, true, vec4(1.f, 0.f, 0.f, 0.3f));
-
-	// Bowser
-	Scene::CreateEnemyEntity("Bowser.png", 50, 60, 1.f, vec3(45.f, -8.f, 3.f), Bowser, b2_dynamicBody, 6609.f, -5.f, 0.f, false, vec4(1.f, 0.f, 1.f, 0.3f));
 
 	// World2 Platforms
 	Scene::CreateGroundEntity("box.png", 3392, 35, 0.f, vec3(5000.f, 0.f, 0.f), b2_staticBody, 5000.f, 150.f, 0.f, true, vec4(0.f, 1.f, 0.f, 0.3f)); //Roof
@@ -284,14 +281,21 @@ void Mario::InitScene(float windowWidth, float windowHeight)
 
 void Mario::Update()
 {
-	//if (m_lerpEnabled)
-	//{
-	//	m_tVal += Timer::deltaTime;
-	//	m_lerpVal = Util::Lerp<float>(m_val1, m_val2, m_tVal);
-	//}
+	// Update Mario Animation
+	ECS::GetComponent<Player>(MainEntities::MainPlayer()).Update();
 
+	// Update Bowser Animation
+	if (ECS::GetComponent<PhysicsBody>(Bowser).speed < 0)
+	{
+		ECS::GetComponent<AnimationController>(Bowser).SetActiveAnim(0);
+	}
+	else
+	{
+		ECS::GetComponent<AnimationController>(Bowser).SetActiveAnim(2);
+	}
+
+	// Bowser Speed Increase
 	int increase = 1;
-
 	if (ECS::GetComponent<PhysicsBody>(Bowser).GetHealth() <= 800 || ECS::GetComponent<PhysicsBody>(Bowser).GetHealth() >= 600)
 	{
 		increase = 2;
@@ -372,12 +376,14 @@ void Mario::Update()
 
 	/////////////////////////////////////////////////////////////////////////// GUI //////////////////////////////////////////////////////////////////
 
+	// Bowser and Mario Attacks
 	ECS::GetComponent<PhysicsBody>(bowserAttack1).SetPosition(ECS::GetComponent<PhysicsBody>(bowserAttack1).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(bowserAttack2).SetPosition(ECS::GetComponent<PhysicsBody>(bowserAttack2).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(marioAttack).SetPosition(ECS::GetComponent<PhysicsBody>(marioAttack).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(marioAttackJump).SetPosition(ECS::GetComponent<PhysicsBody>(marioAttackJump).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 	ECS::GetComponent<PhysicsBody>(Bowser).SetPosition(ECS::GetComponent<PhysicsBody>(Bowser).GetPosition() + b2Vec2(ECS::GetComponent<PhysicsBody>(Bowser).speed * increase, 0), true);
 
+	// Win and Loss Conditions
 	if (ECS::GetComponent<PhysicsBody>(Bowser).GetHealth() == 0)
 	{
 		ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).SetPosition(b2Vec2(0, 6810));
@@ -391,6 +397,7 @@ void Mario::Update()
 		ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).SetHealth(100);
 	}
 
+	// Change Background Color
 	if (ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetPosition() == b2Vec2(3452.f, -150.f))
 	{
 		m_clearColor = vec4(0.f, 0.f, 0.f, 0.f);
@@ -404,7 +411,7 @@ void Mario::Update()
 		m_clearColor = vec4(0.549f, 0.639f, 0.796f, 1.f);
 	}
 
-	//std::cout << "Stars Captured: " << ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer()).GetStar() << std::endl;
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	if (m_lerpEnabled)
 	{
@@ -500,19 +507,6 @@ void Mario::GUIWindowOne()
 
 			if (ImGui::TreeNode("Properties"))
 			{
-
-				//if (m_lerpEnabled)
-				//{
-				//	if (m_tVal >= 1.f)
-				//	{
-				//		m_lerpEnabled = false;
-				//		m_tVal = 0.f;
-				//		m_lerpVal = m_val2;
-				//	}
-
-				//	vig->SetOuterRadius(m_lerpVal);
-				//}
-
 				float innerRad = vig->GetInnerRadius();
 				float outerRad = vig->GetOuterRadius();
 				float opacity = vig->GetOpacity();
@@ -530,23 +524,6 @@ void Mario::GUIWindowOne()
 				{
 					vig->SetOpacity(opacity);
 				}
-
-				//if (ImGui::Button("Transition Out", ImVec2(150.f, 30.f)))
-				//{
-				//	vig->SetInnerRadius(0.f);
-				//	m_lerpEnabled = true;
-				//	m_val1 = 1.f;
-				//	m_val2 = 0.f;
-				//}
-
-				//if (ImGui::Button("Transition In", ImVec2(150.f, 30.f)))
-				//{
-				//	vig->SetInnerRadius(0.f);
-				//	m_lerpEnabled = true;
-				//	m_val1 = 0.f;
-				//	m_val2 = 1.f;
-				//}
-
 				ImGui::TreePop();
 			}
 
@@ -681,57 +658,12 @@ void Mario::GUIWindowTwo()
 
 void Mario::KeyboardHold()
 {
-	auto& player = ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer());
-
-	float speed = 1.f;
-	b2Vec2 vel = b2Vec2(0.f, 0.f);
-
-	if (Input::GetKey(Key::Shift))
-	{
-		speed *= 1.5f;
-	}
-
-	if (Input::GetKey(Key::A))
-	{
-		player.GetBody()->ApplyForceToCenter(b2Vec2(-400000.f * speed, 0.f), true);
-	}
-	if (Input::GetKey(Key::D))
-	{
-		player.GetBody()->ApplyForceToCenter(b2Vec2(400000.f * speed, 0.f), true);
-	}
-
-	////Change physics body size for circle
-	//if (Input::GetKey(Key::O))
-	//{
-	//	player.ScaleBody(1.3 * Timer::deltaTime, 0);
-	//}
-	//else if (Input::GetKey(Key::I))
-	//{
-	//	player.ScaleBody(-1.3 * Timer::deltaTime, 0);
-	//}
 }
 
 void Mario::KeyboardDown()
 {
-	auto& player = ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer());
-	auto& canJump = ECS::GetComponent<CanJump>(MainEntities::MainPlayer());
-
-	if (Input::GetKeyDown(Key::T))
-	{
-		PhysicsBody::SetDraw(!PhysicsBody::GetDraw());
-	}
-	if (canJump.m_canJump)
-	{
-		if (Input::GetKeyDown(Key::Space))
-		{
-			player.GetBody()->ApplyLinearImpulseToCenter(b2Vec2(0.f, 160000.f), true);
-			canJump.m_canJump = false;
-		}
-	}
 }
 
 void Mario::KeyboardUp()
 {
-
-
 }

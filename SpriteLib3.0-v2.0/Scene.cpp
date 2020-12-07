@@ -182,10 +182,15 @@ void Scene::CreateMainPlayerEntity(std::string name, int imageWidth, int imageHe
 	ECS::AttachComponent<Transform>(entity);
 	ECS::AttachComponent<PhysicsBody>(entity);
 	ECS::AttachComponent<CanJump>(entity);
+	ECS::AttachComponent<Player>(entity);
+	ECS::AttachComponent<AnimationController>(entity);
 
 	//Sets up the components
-	ECS::GetComponent<Sprite>(entity).LoadSprite(name, imageWidth, imageHeight);
-	ECS::GetComponent<Sprite>(entity).SetTransparency(transparency);
+	std::string fileName = "spritesheets/"+name;
+	std::string animations = "mario.json";
+	ECS::GetComponent<Player>(entity).InitPlayer(fileName, animations, imageWidth, imageHeight, &ECS::GetComponent<Sprite>(entity),
+		&ECS::GetComponent<AnimationController>(entity), &ECS::GetComponent<Transform>(entity), true,
+		&ECS::GetComponent<PhysicsBody>(entity));
 	ECS::GetComponent<Transform>(entity).SetPosition(spritePosition);
 
 	auto& tempSpr = ECS::GetComponent<Sprite>(entity);
@@ -200,7 +205,6 @@ void Scene::CreateMainPlayerEntity(std::string name, int imageWidth, int imageHe
 	tempDef.position.Set(float32(physicsPositionX), float32(physicsPositionY));
 
 	tempBody = m_physicsWorld->CreateBody(&tempDef);
-	tempBody->SetSleepingAllowed(false);
 
 	tempPhsBody = PhysicsBody(entity, tempBody, float(tempSpr.GetWidth() - shrinkX), float(tempSpr.GetHeight() - shrinkY),
 		vec2(0.f, 0.f), false, PLAYER, ENEMY | OBJECTS | PICKUP | TRIGGER, 5.5f, 3.f);
@@ -294,14 +298,59 @@ void Scene::CreateEnemyEntity(std::string name, int imageWidth, int imageHeight,
 	auto entity = ECS::CreateEntity();
 	target = entity;
 
-	//Add components
 	ECS::AttachComponent<Sprite>(entity);
 	ECS::AttachComponent<Transform>(entity);
 	ECS::AttachComponent<PhysicsBody>(entity);
+	ECS::AttachComponent<AnimationController>(entity);
 
-	//Sets up the components
-	ECS::GetComponent<Sprite>(entity).LoadSprite(name, imageWidth, imageHeight);
-	ECS::GetComponent<Sprite>(entity).SetTransparency(transparency);
+	std::string filename = "spritesheets/" + name;
+	auto& animController = ECS::GetComponent<AnimationController>(entity);
+	animController.InitUVs(filename);
+	animController.AddAnimation(Animation());
+	animController.AddAnimation(Animation());
+	animController.AddAnimation(Animation());
+	animController.AddAnimation(Animation());
+
+	{
+		auto& anim = animController.GetAnimation(0);
+		for (int x(0); x < 2; x++)
+		{
+			anim.AddFrame(vec2(128 * x, 127), vec2(128 * (x + 1) - 1, 0));
+		}
+		anim.SetRepeating(true);
+		anim.SetSecPerFrame(0.1f);
+	}
+	{
+		auto& anim = animController.GetAnimation(1);
+		for (int x(0); x < 2; x++)
+		{
+			anim.AddFrame(vec2(128 * x, 255), vec2(128 * (x + 1) - 1, 128));
+		}
+		anim.SetRepeating(false);
+		anim.SetSecPerFrame(0.1f);
+	}
+	{
+		auto& anim = animController.GetAnimation(2);
+		for (int x(0); x < 2; x++)
+		{
+			anim.AddFrame(vec2(128 * x, 257), vec2(128 * (x + 1) - 1, 130));
+		}
+		anim.SetRepeating(true);
+		anim.SetSecPerFrame(0.1f);
+	}
+	{
+		auto& anim = animController.GetAnimation(3);
+		for (int x(0); x < 2; x++)
+		{
+			anim.AddFrame(vec2(128 * x, 355), vec2(128 * (x + 1) - 1, 278));
+		}
+		anim.SetRepeating(false);
+		anim.SetSecPerFrame(0.1f);
+	}
+
+	animController.SetActiveAnim(0);
+
+	ECS::GetComponent<Sprite>(entity).LoadSprite(filename, imageWidth, imageHeight, true, &animController);
 	ECS::GetComponent<Transform>(entity).SetPosition(spritePosition);
 
 	auto& tempSpr = ECS::GetComponent<Sprite>(entity);
@@ -318,7 +367,8 @@ void Scene::CreateEnemyEntity(std::string name, int imageWidth, int imageHeight,
 	tempBody = m_physicsWorld->CreateBody(&tempDef);
 	tempBody->SetSleepingAllowed(false);
 
-	tempPhsBody = PhysicsBody(entity, tempBody, float((tempSpr.GetWidth() - shrinkY)), float((tempSpr.GetHeight() - shrinkY)), vec2(0.f, 0.f), false, ENEMY, GROUND | ENVIRONMENT | PLAYER | OBJECTS | TRIGGER, 0.3f);
+	tempPhsBody = PhysicsBody(entity, tempBody, float((tempSpr.GetWidth() - shrinkY)), float((tempSpr.GetHeight() - shrinkY)), 
+		vec2(0.f, 0.f), false, ENEMY, GROUND | ENVIRONMENT | PLAYER | OBJECTS | TRIGGER, 0.3f);
 
 	tempPhsBody.SetHealth(1000);
 	tempPhsBody.SetRotationAngleDeg(angle);
